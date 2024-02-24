@@ -5,6 +5,7 @@ import {
   filmesResponse,
   mockFilm,
   mockPerson,
+  mockPlanet,
   peopleResponse,
 } from './mockData';
 
@@ -77,9 +78,26 @@ export const getPeopleHandler = (opts?: HandlerOptions) => {
   });
 };
 
+export const getPlanetHandler = (opts?: HandlerOptions) => {
+  const { error, delay: delayTime = 0 } = opts || {};
+
+  return http.get(`${config.apiUrl}/planets/:id`, async () => {
+    if (delayTime) {
+      await delay(delayTime);
+    }
+
+    if (error) {
+      return HttpResponse.error();
+    }
+
+    return HttpResponse.json(mockPlanet, { status: 200 });
+  });
+};
+
 export const handlers = [
   getFilmsHandler(),
   getPeopleHandler(),
   getFilmHandler(),
   getPersonHandler(),
+  getPlanetHandler(),
 ];

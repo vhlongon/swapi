@@ -74,6 +74,30 @@ export const PersonSchema = z
     skinColor: skin_color,
   }));
 
+export const PlanetSchema = z
+  .object({
+    name: z.string(),
+    rotation_period: z.string(),
+    orbital_period: z.string(),
+    diameter: z.string(),
+    climate: z.string(),
+    gravity: z.string(),
+    terrain: z.string(),
+    surface_water: z.string(),
+    population: z.string(),
+    residents: z.array(z.string()),
+    films: z.array(z.string()),
+    created: z.string().datetime(),
+    edited: z.string().datetime(),
+    url: z.string(),
+  })
+  .transform(({ rotation_period, orbital_period, surface_water, ...rest }) => ({
+    ...rest,
+    rotationPeriod: rotation_period,
+    orbitalPeriod: orbital_period,
+    surfaceWater: surface_water,
+  }));
+
 export const PeopleSchema = z.object({
   count: z.number(),
   results: z.array(PersonSchema),
@@ -93,10 +117,16 @@ export const getPeople = async () => {
   return PeopleSchema.parse(data);
 };
 
-export const getPersonId = (url: string) => {
+export const getIdFromUrl = (url: string) => {
   const urlParts = url.split('/').filter(Boolean);
 
   return Number(urlParts[urlParts.length - 1]);
+};
+
+export const getPlanet = async (id: number) => {
+  const data = await fetchWrapper(`${config.apiUrl}/planets/${id}/`);
+
+  return PlanetSchema.parse(data);
 };
 
 export const getPerson = async (id: number) => {
@@ -105,9 +135,28 @@ export const getPerson = async (id: number) => {
   return PersonSchema.parse(data);
 };
 
+export const getFilmsForCharacter = async (resourceUrls: string[]) => {
+  const filmRequests = resourceUrls.map(resourceUrl =>
+    getFilm(getIdFromUrl(resourceUrl))
+  );
+
+  return Promise.all(filmRequests);
+};
+export const getPersonWithFilms = async (id: number) => {
+  const personData = await getPerson(id);
+  const filmsData = await getFilmsForCharacter(personData.films);
+  const homeworld = await getPlanet(getIdFromUrl(personData.homeworld));
+
+  return {
+    ...personData,
+    homeworld: homeworld.name,
+    films: filmsData.map(film => film.title),
+  };
+};
+
 export const getCharactersForFilm = async (resourceUrls: string[]) => {
   const characterRequests = resourceUrls.map(resourceUrl =>
-    getPerson(getPersonId(resourceUrl))
+    getPerson(getIdFromUrl(resourceUrl))
   );
 
   return Promise.all(characterRequests);

@@ -3,6 +3,7 @@ import {
   FilmResponse,
   PersonResponse,
   PeopleResponse,
+  PlanetResponse,
 } from '@/types';
 
 export const mockFilm: FilmResponse = {
@@ -22,6 +23,23 @@ export const mockFilm: FilmResponse = {
   opening_crawl: 'Episode IV opening crawl',
 };
 
+export const mockPlanet: PlanetResponse = {
+  name: 'Tatooine',
+  rotation_period: '23',
+  orbital_period: '304',
+  diameter: '10465',
+  climate: 'arid',
+  gravity: '1 standard',
+  terrain: 'desert',
+  surface_water: '1',
+  population: '200000',
+  residents: ['https://swapi.dev/api/people/1/'],
+  films: ['https://swapi.dev/api/films/1/'],
+  created: '2014-12-09T13:50:49.641000Z',
+  edited: '2014-12-20T20:58:18.411000Z',
+  url: 'https://swapi.dev/api/planets/1/',
+};
+
 export const mockPerson: PersonResponse = {
   name: 'Luke Skywalker',
   height: '172',
@@ -32,21 +50,10 @@ export const mockPerson: PersonResponse = {
   birth_year: '19BBY',
   gender: 'male',
   homeworld: 'https://swapi.dev/api/planets/1/',
-  films: [
-    'https://swapi.dev/api/films/1/',
-    'https://swapi.dev/api/films/2/',
-    'https://swapi.dev/api/films/3/',
-    'https://swapi.dev/api/films/6/',
-  ],
+  films: ['https://swapi.dev/api/films/1/'],
   species: [],
-  vehicles: [
-    'https://swapi.dev/api/vehicles/14/',
-    'https://swapi.dev/api/vehicles/30/',
-  ],
-  starships: [
-    'https://swapi.dev/api/starships/12/',
-    'https://swapi.dev/api/starships/22/',
-  ],
+  vehicles: ['https://swapi.dev/api/vehicles/14/'],
+  starships: ['https://swapi.dev/api/starships/12/'],
   created: '2014-12-09T13:50:51.644000Z',
   edited: '2014-12-20T21:17:56.891000Z',
   url: 'https://swapi.dev/api/people/1/',
