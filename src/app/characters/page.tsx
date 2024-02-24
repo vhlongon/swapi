@@ -1,5 +1,6 @@
 import { getCharactersForFilms } from '@/utils/api';
 import { getViewedFilms } from '@/utils/session';
+import Link from 'next/link';
 
 export default async function CharactersPage() {
   const viewedFilms = getViewedFilms();
@@ -11,7 +12,9 @@ export default async function CharactersPage() {
       {characters.length > 0 ? (
         <ul>
           {characters.map(character => (
-            <li key={character.id}>{character.name}</li>
+            <li key={character.id}>
+              <Link href={`/person/${character.id}`}>{character.name}</Link>
+            </li>
           ))}
         </ul>
       ) : (
