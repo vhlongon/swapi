@@ -118,27 +118,27 @@ export const getPeople = async () => {
   return PeopleSchema.parse(data);
 };
 
-export const getIdFromUrl = (url: string) => {
+const getIdFromUrl = (url: string) => {
   const urlParts = url.split('/').filter(Boolean);
 
   return Number(urlParts[urlParts.length - 1]);
 };
 
-export const getPlanet = async (id: number) => {
+const getPlanet = async (id: number) => {
   const data = await fetchWrapper(`${config.apiUrl}/planets/${id}/`);
 
   return PlanetSchema.parse(data);
 };
 
-export const getPerson = async (id: number) => {
+const getPerson = async (id: number) => {
   const data = await fetchWrapper(`${config.apiUrl}/people/${id}/`);
 
   return PersonSchema.parse(data);
 };
 
-export const getFilmsForCharacter = async (resourceUrls: string[]) => {
+const getFilmsForCharacter = async (resourceUrls: string[]) => {
   const filmRequests = resourceUrls.map(resourceUrl =>
-    getFilm(getIdFromUrl(resourceUrl))
+    getFilmWithCharacters(getIdFromUrl(resourceUrl))
   );
 
   return Promise.all(filmRequests);
@@ -159,7 +159,7 @@ export const getPersonWithFilms = async (id: number) => {
 };
 
 export const getCharactersForFilms = memoize(async (ids: number[]) => {
-  const filmsData = await Promise.all(ids.map(getFilm));
+  const filmsData = await Promise.all(ids.map(getFilmWithCharacters));
   const allCharacters = filmsData.flatMap(film => film.characters);
 
   const uniqueCharacterIds = new Set<number>();
@@ -174,13 +174,13 @@ export const getCharactersForFilms = memoize(async (ids: number[]) => {
   return result;
 });
 
-export const getCharactersForFilm = async (ids: number[]) => {
+const getCharactersForFilm = async (ids: number[]) => {
   const characterRequests = ids.map(getPerson);
 
   return Promise.all(characterRequests);
 };
 
-export const getFilm = async (id: number) => {
+export const getFilmWithCharacters = async (id: number) => {
   const response = await fetchWrapper(`${config.apiUrl}/films/${id}/`);
   const filmData = FilmSchema.parse(response);
   const characters = await getCharactersForFilm(

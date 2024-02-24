@@ -1,5 +1,5 @@
 import { List } from '@/components/List';
-import { getFilm } from '@/lib/api';
+import { getFilmWithCharacters } from '@/lib/api';
 import { omit } from '@/lib/utils';
 import Link from 'next/link';
 
@@ -10,7 +10,7 @@ type FilmPageProps = {
 };
 
 const getData = async (id: number) => {
-  const filmData = await getFilm(id);
+  const filmData = await getFilmWithCharacters(id);
   return omit(filmData, ['planets', 'species', 'starships', 'vehicles', 'url']);
 };
 
