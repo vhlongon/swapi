@@ -1,12 +1,11 @@
-import { getFilm } from '@/utils/api';
 import { config } from '@/app/config';
 import { HttpResponse, delay, http } from 'msw';
 import {
-  mockFilmesResponse,
   mockFilm,
+  mockFilmesResponse,
+  mockPeopleResponse,
   mockPerson,
   mockPlanet,
-  mockPeopleResponse,
 } from './mockData';
 
 type HandlerOptions = Partial<{

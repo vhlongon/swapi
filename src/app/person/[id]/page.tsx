@@ -1,6 +1,6 @@
 import { List } from '@/components/List';
-import { getPersonWithFilms } from '@/utils/api';
-import { omit } from '@/utils/utils';
+import { getPersonWithFilms } from '@/lib/api';
+import { omit } from '@/lib/utils';
 import Link from 'next/link';
 
 type PersonPageProps = {

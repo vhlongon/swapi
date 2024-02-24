@@ -1,4 +1,4 @@
-import { getFilms } from '@/utils/api';
+import { getFilms } from '@/lib/api';
 import Link from 'next/link';
 
 export default async function Home() {

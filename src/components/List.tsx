@@ -1,4 +1,4 @@
-import { capitalize } from '@/utils/utils';
+import { capitalize } from '@/lib/utils';
 import React from 'react';
 
 type ListProps = Record<string, string | number>;

@@ -1,6 +1,6 @@
 import { List } from '@/components/List';
-import { getFilm } from '@/utils/api';
-import { omit } from '@/utils/utils';
+import { getFilm } from '@/lib/api';
+import { omit } from '@/lib/utils';
 import Link from 'next/link';
 
 type FilmPageProps = {

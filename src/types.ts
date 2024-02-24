@@ -5,7 +5,7 @@ import {
   PeopleSchema,
   PersonSchema,
   PlanetSchema,
-} from './utils/api';
+} from './lib/api';
 
 export type Film = z.output<typeof FilmSchema>;
 export type FilmResponse = z.input<typeof FilmSchema>;

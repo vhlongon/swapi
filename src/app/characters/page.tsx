@@ -1,5 +1,5 @@
-import { getCharactersForFilms } from '@/utils/api';
-import { getViewedFilms } from '@/utils/session';
+import { getCharactersForFilms } from '@/lib/api';
+import { getViewedFilms } from '@/lib/session';
 import Link from 'next/link';
 
 export default async function CharactersPage() {

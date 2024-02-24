@@ -2,7 +2,7 @@ import { mockPerson } from '@/test/mocks/mockData';
 import { render, screen } from '@testing-library/react';
 import CharactersPage from '../page';
 
-vi.mock('@/utils/session', () => ({
+vi.mock('@/lib/session', () => ({
   getViewedFilms: vi.fn().mockReturnValue([1]),
 }));
 
