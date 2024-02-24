@@ -1,4 +1,5 @@
 import { getFilms } from '@/utils/api';
+import Link from 'next/link';
 
 export default async function Home() {
   const films = await getFilms();
@@ -7,7 +8,9 @@ export default async function Home() {
       <h1>Films:</h1>
       <ul>
         {films.map(film => (
-          <li key={film.episodeId}>{film.title}</li>
+          <Link key={film.episodeId} href={`/film/${film.episodeId}`}>
+            <li>{film.title}</li>
+          </Link>
         ))}
       </ul>
     </main>
