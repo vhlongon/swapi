@@ -1,5 +1,6 @@
-import { z } from 'zod';
 import { config } from '@/app/config';
+import { z } from 'zod';
+import { memoize } from './utils';
 
 const fetchWrapper = async (
   url: string,
@@ -157,10 +158,24 @@ export const getPersonWithFilms = async (id: number) => {
   };
 };
 
-export const getCharactersForFilm = async (resourceUrls: string[]) => {
-  const characterRequests = resourceUrls.map(resourceUrl =>
-    getPerson(getIdFromUrl(resourceUrl))
-  );
+export const getCharactersForFilms = memoize(async (ids: number[]) => {
+  const filmsData = await Promise.all(ids.map(getFilm));
+  const allCharacters = filmsData.flatMap(film => film.characters);
+
+  const uniqueCharacterIds = new Set<number>();
+  const result = allCharacters.filter(character => {
+    if (uniqueCharacterIds.has(character.id)) {
+      return false;
+    }
+    uniqueCharacterIds.add(character.id);
+    return true;
+  });
+
+  return result;
+});
+
+export const getCharactersForFilm = async (ids: number[]) => {
+  const characterRequests = ids.map(getPerson);
 
   return Promise.all(characterRequests);
 };
@@ -168,7 +183,9 @@ export const getCharactersForFilm = async (resourceUrls: string[]) => {
 export const getFilm = async (id: number) => {
   const response = await fetchWrapper(`${config.apiUrl}/films/${id}/`);
   const filmData = FilmSchema.parse(response);
-  const characters = await getCharactersForFilm(filmData.characters);
+  const characters = await getCharactersForFilm(
+    filmData.characters.map(getIdFromUrl)
+  );
 
   return {
     ...filmData,

@@ -9,15 +9,15 @@ type FilmPageProps = {
   };
 };
 
+const getData = async (id: number) => {
+  const filmData = await getFilm(id);
+  return omit(filmData, ['planets', 'species', 'starships', 'vehicles', 'url']);
+};
+
 export default async function FilmPage({ params }: FilmPageProps) {
-  const filmData = await getFilm(Number(params.id));
-  const { title, openingCrawl, characters, ...rest } = omit(filmData, [
-    'planets',
-    'species',
-    'starships',
-    'vehicles',
-    'url',
-  ]);
+  const { title, openingCrawl, characters, ...rest } = await getData(
+    Number(params.id)
+  );
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">

@@ -22,3 +22,18 @@ export const omit = <T extends Record<string, unknown>, K extends keyof T>(
 
 export const capitalize = (str: string) =>
   str.charAt(0).toUpperCase() + str.slice(1);
+
+export const memoize = <T extends (...args: any[]) => any>(fn: T) => {
+  const cache = new Map<string, ReturnType<T>>();
+
+  return (...args: Parameters<T>): ReturnType<T> => {
+    const key = JSON.stringify(args);
+    if (cache.has(key)) {
+      return cache.get(key) as ReturnType<T>;
+    }
+
+    const result = fn(...args);
+    cache.set(key, result);
+    return result;
+  };
+};
