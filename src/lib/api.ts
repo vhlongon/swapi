@@ -1,6 +1,5 @@
 import { config } from '@/app/config';
 import { z } from 'zod';
-import { memoize } from './utils';
 
 const fetchWrapper = async (
   url: string,
@@ -158,7 +157,7 @@ export const getPersonWithFilms = async (id: number) => {
   };
 };
 
-export const getCharactersForFilms = memoize(async (ids: number[]) => {
+export const getCharactersForFilms = async (ids: number[]) => {
   const filmsData = await Promise.all(ids.map(getFilmWithCharacters));
   const allCharacters = filmsData.flatMap(film => film.characters);
 
@@ -172,7 +171,7 @@ export const getCharactersForFilms = memoize(async (ids: number[]) => {
   });
 
   return result;
-});
+};
 
 const getCharactersForFilm = async (ids: number[]) => {
   const characterRequests = ids.map(getPerson);

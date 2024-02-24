@@ -1,7 +1,7 @@
-import { cookies } from 'next/headers';
+import Cookies from 'js-cookie';
 
 export const getViewedFilms = () => {
-  const cookieValue = cookies().get('viewedFilms')?.value;
+  const cookieValue = Cookies.get('viewedFilms');
 
   return cookieValue?.split(',').map(Number) ?? [];
 };

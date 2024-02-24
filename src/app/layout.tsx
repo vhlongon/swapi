@@ -1,3 +1,4 @@
+import { ClientProviders } from '@/components/ClientProviders';
 import Nav from '@/components/Nav';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -19,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Nav />
-        {children}
+        <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
   );
