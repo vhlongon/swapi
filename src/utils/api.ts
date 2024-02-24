@@ -150,7 +150,10 @@ export const getPersonWithFilms = async (id: number) => {
   return {
     ...personData,
     homeworld: homeworld.name,
-    films: filmsData.map(film => film.title),
+    films: filmsData.map(film => ({
+      title: film.title,
+      id: getIdFromUrl(film.url),
+    })),
   };
 };
 
@@ -169,6 +172,9 @@ export const getFilm = async (id: number) => {
 
   return {
     ...filmData,
-    characters: characters.map(character => character.name),
+    characters: characters.map(character => ({
+      name: character.name,
+      id: getIdFromUrl(character.url),
+    })),
   };
 };

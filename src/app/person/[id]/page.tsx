@@ -1,6 +1,7 @@
 import { List } from '@/components/List';
 import { getPersonWithFilms } from '@/utils/api';
 import { omit } from '@/utils/utils';
+import Link from 'next/link';
 
 type PersonPageProps = {
   params: {
@@ -10,7 +11,7 @@ type PersonPageProps = {
 
 export default async function PersonPage({ params }: PersonPageProps) {
   const personData = await getPersonWithFilms(Number(params.id));
-  const { name, ...rest } = omit(personData, [
+  const { name, films, ...rest } = omit(personData, [
     'url',
     'vehicles',
     'starships',
@@ -20,6 +21,15 @@ export default async function PersonPage({ params }: PersonPageProps) {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
       <h1>{name}</h1>
+      <p>Films:</p>
+      <ul>
+        {films.map(film => (
+          <li key={film.id}>
+            <Link href={`/film/${film.id}`}>{film.title}</Link>
+          </li>
+        ))}
+      </ul>
+      <p>More info:</p>
       <List {...rest} />
     </main>
   );

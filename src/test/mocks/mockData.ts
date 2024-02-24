@@ -59,14 +59,14 @@ export const mockPerson: PersonResponse = {
   url: 'https://swapi.dev/api/people/1/',
 };
 
-export const peopleResponse: PeopleResponse = {
+export const mockPeopleResponse: PeopleResponse = {
   count: 1,
   next: null,
   previous: null,
   results: [mockPerson],
 };
 
-export const filmesResponse: FilmsResponse = {
+export const mockFilmesResponse: FilmsResponse = {
   count: 1,
   next: null,
   previous: null,

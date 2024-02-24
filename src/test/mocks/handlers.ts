@@ -2,11 +2,11 @@ import { getFilm } from '@/utils/api';
 import { config } from '@/app/config';
 import { HttpResponse, delay, http } from 'msw';
 import {
-  filmesResponse,
+  mockFilmesResponse,
   mockFilm,
   mockPerson,
   mockPlanet,
-  peopleResponse,
+  mockPeopleResponse,
 } from './mockData';
 
 type HandlerOptions = Partial<{
@@ -26,7 +26,7 @@ export const getFilmsHandler = (opts?: HandlerOptions) => {
       return HttpResponse.error();
     }
 
-    return HttpResponse.json(filmesResponse, { status: 200 });
+    return HttpResponse.json(mockFilmesResponse, { status: 200 });
   });
 };
 
@@ -74,7 +74,7 @@ export const getPeopleHandler = (opts?: HandlerOptions) => {
       return HttpResponse.error();
     }
 
-    return HttpResponse.json(peopleResponse, { status: 200 });
+    return HttpResponse.json(mockPeopleResponse, { status: 200 });
   });
 };
 
