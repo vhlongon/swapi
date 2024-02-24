@@ -1,3 +1,3 @@
 export const config = {
-  apiUrl: 'https://swapi.dev/api/',
+  apiUrl: 'https://swapi.dev/api',
 } as const;

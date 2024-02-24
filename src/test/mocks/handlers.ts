@@ -7,10 +7,10 @@ type HandlerOptions = Partial<{
   delay: number;
 }>;
 
-export const getUserHandler = (opts?: HandlerOptions) => {
+export const getFilmsHandler = (opts?: HandlerOptions) => {
   const { error, delay: delayTime = 0 } = opts || {};
 
-  return http.get(config.apiUrl, async () => {
+  return http.get(`${config.apiUrl}/films/`, async () => {
     if (delayTime) {
       await delay(delayTime);
     }
@@ -19,7 +19,13 @@ export const getUserHandler = (opts?: HandlerOptions) => {
       return HttpResponse.error();
     }
 
-    return HttpResponse.json(mockData, { status: 200 });
+    return HttpResponse.json(
+      {
+        count: 1,
+        results: mockData.films,
+      },
+      { status: 200 }
+    );
   });
 };
-export const handlers = [getUserHandler()];
+export const handlers = [getFilmsHandler()];
