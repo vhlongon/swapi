@@ -1,8 +1,14 @@
 import { mockFilm, mockPerson, mockPlanet } from '@/test/mocks/mockData';
 import { render, screen } from '@testing-library/react';
-import PersonPage from '../[id]/page';
+import PersonPage, { generateMetadata } from '../[id]/page';
 
 describe('Person page', () => {
+  test('should render main page title', async () => {
+    expect(await generateMetadata({ params: { id: '1' } })).toEqual({
+      title: mockPerson.name,
+    });
+  });
+
   it('should render main page title and films', async () => {
     render(await PersonPage({ params: { id: '1' } }));
 
