@@ -1,4 +1,5 @@
 'use client';
+import { ErrorCard } from '@/components/ErrorCard';
 import { getCharactersForFilms } from '@/lib/api';
 import { getViewedFilms } from '@/lib/session';
 import { useQuery } from '@tanstack/react-query';
@@ -6,7 +7,7 @@ import Link from 'next/link';
 
 export const CharactersList = () => {
   const viewedFilms = getViewedFilms();
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryFn: () => getCharactersForFilms(viewedFilms),
     queryKey: ['characters', viewedFilms],
   });
@@ -21,12 +22,11 @@ export const CharactersList = () => {
   }
 
   if (error) {
-    return <div>Something went wrong</div>;
+    return <ErrorCard error={error} reset={refetch} />;
   }
 
   if (data) {
-    const count = data?.length;
-    return count ? (
+    return data.length ? (
       <ul className="flex flex-col gap-4">
         {data.map(character => (
           <li key={character.id}>

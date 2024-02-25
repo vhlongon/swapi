@@ -20,6 +20,7 @@ export default defineConfig({
         'next.config.mjs',
         'postcss.config.js',
         'tailwind.config.ts',
+        'src/app/layout.tsx',
       ],
     },
   },
