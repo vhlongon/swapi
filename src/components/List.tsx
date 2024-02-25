@@ -10,11 +10,13 @@ export const List = (props: ListProps) => {
         return (
           <li
             key={key}
-            className="flex flex-col even:items-end odd:items-start prose prose-sm"
+            className="flex flex-col even:text-end odd:text-start prose prose-sm justify-between"
           >
             <span>{capitalize(key)}</span>
-            <span>{value}</span>
-            <div className="divider m-1" />
+            <div>
+              <span>{value}</span>
+              <div className="divider m-1" />
+            </div>
           </li>
         );
       })}
