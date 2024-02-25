@@ -1,9 +1,9 @@
 import { capitalize } from '@/lib/utils';
 import React from 'react';
 
-type ListProps = Record<string, string | number>;
+type MoreDetailsListProps = Record<string, string | number>;
 
-export const List = (props: ListProps) => {
+export const MoreDetailsList = (props: MoreDetailsListProps) => {
   return (
     <ul className="grid grid-cols-2 gap-4 w-full justify-between">
       {Object.entries(props).map(([key, value]) => {

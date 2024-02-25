@@ -1,6 +1,6 @@
 import { Film } from '@/types';
 import Link from 'next/link';
-import { List } from './List';
+import { MoreDetailsList } from './MoreDetailsList';
 
 type FilmCardProps = Omit<
   Film,
@@ -43,7 +43,7 @@ export const FilmCard = ({
           </div>
         </details>
         <div className="card-actions mt-2 justify-between w-full">
-          <List {...rest} />
+          <MoreDetailsList {...rest} />
         </div>
       </div>
     </div>

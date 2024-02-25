@@ -1,7 +1,7 @@
 import { Person } from '@/types';
 import Link from 'next/link';
 import React from 'react';
-import { List } from './List';
+import { MoreDetailsList } from './MoreDetailsList';
 
 type PersonCardProps = Omit<
   Person,
@@ -31,7 +31,7 @@ export const PersonCard = ({ name, films, ...rest }: PersonCardProps) => {
           </div>
         </details>
         <div className="card-actions mt-2 justify-between w-full">
-          <List {...rest} />
+          <MoreDetailsList {...rest} />
         </div>
       </div>
     </div>
