@@ -1,7 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
-
 type ErrorPageProps = {
   error: Error & {
     digest?: string;
@@ -10,10 +8,6 @@ type ErrorPageProps = {
 };
 
 export default function ErrorPage({ error, reset }: ErrorPageProps) {
-  useEffect(() => {
-    console.error(error);
-  }, [error]);
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-4">
       <div className="card w-full max-w-96 bg-neutral text-neutral-content">
