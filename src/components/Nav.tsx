@@ -4,7 +4,10 @@ const Nav = () => {
   return (
     <>
       <nav className="navbar bg-base-100">
-        <div className="flex-1 font-bold text-primary text-2xl tracking-wider">
+        <div
+          aria-label="logo"
+          className="flex-1 font-bold text-primary text-2xl tracking-wider"
+        >
           Swapi
         </div>
         <div className="flex-none">

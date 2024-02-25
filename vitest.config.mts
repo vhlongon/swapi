@@ -6,7 +6,7 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],
-    exclude: [...defaultExclude, 'e2e/**'],
+    exclude: [...defaultExclude, './src/e2e/**'],
     coverage: {
       provider: 'istanbul',
       reporter: ['text-summary', 'text', 'html', 'lcov', 'json-summary'],
