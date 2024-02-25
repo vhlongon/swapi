@@ -13,8 +13,10 @@ export default defineConfig({
       exclude: [
         ...defaultExclude,
         'playwright.config.ts',
+        'playwright-report/**',
+        'src/middleware.ts',
         '.next/**',
-        'next.config.js',
+        'next.config.mjs',
         'postcss.config.js',
         'tailwind.config.ts',
         'test/**',
