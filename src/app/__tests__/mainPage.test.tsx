@@ -7,7 +7,7 @@ describe('Main page', () => {
     render(await MainPage());
 
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-      'Films:'
+      'Films'
     );
     expect(screen.getByText(mockFilm.title)).toBeInTheDocument();
   });

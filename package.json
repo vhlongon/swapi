@@ -21,6 +21,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.10",
     "@tanstack/eslint-plugin-query": "^5.20.1",
     "@testing-library/react": "^14.2.1",
     "@testing-library/user-event": "^14.5.2",

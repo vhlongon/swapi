@@ -12,7 +12,12 @@ export const CharactersList = () => {
   });
 
   if (isLoading) {
-    return <div>loading</div>;
+    return (
+      <span
+        aria-label="loading"
+        className="loading loading-spinner loading-lg"
+      ></span>
+    );
   }
 
   if (error) {
@@ -22,16 +27,18 @@ export const CharactersList = () => {
   if (data) {
     const count = data?.length;
     return count ? (
-      <>
-        <p>Viewed: {count}</p>
-        <ul>
-          {data.map(character => (
-            <li key={character.id}>
-              <Link href={`/person/${character.id}`}>{character.name}</Link>
-            </li>
-          ))}
-        </ul>
-      </>
+      <ul className="flex flex-col gap-4">
+        {data.map(character => (
+          <li key={character.id}>
+            <Link
+              className="btn btn-outline w-80"
+              href={`/person/${character.id}`}
+            >
+              {character.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
     ) : (
       <p>No characters viewed yet</p>
     );

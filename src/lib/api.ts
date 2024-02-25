@@ -33,12 +33,18 @@ export const FilmSchema = z
     created: z.string().datetime(),
     edited: z.string().datetime(),
   })
-  .transform(({ episode_id, opening_crawl, release_date, ...rest }) => ({
-    ...rest,
-    episodeId: episode_id,
-    releaseDate: release_date,
-    openingCrawl: opening_crawl,
-  }));
+  .transform(
+    ({ episode_id, opening_crawl, release_date, characters, ...rest }) => ({
+      ...rest,
+      episodeId: episode_id,
+      releaseDate: release_date,
+      openingCrawl: opening_crawl,
+      characters: characters.map(c => ({
+        id: getIdFromUrl(c),
+        name: c,
+      })),
+    })
+  );
 
 export const FilmsSchema = z.object({
   count: z.number(),
@@ -66,13 +72,19 @@ export const PersonSchema = z
     vehicles: z.array(z.string()),
     url: z.string(),
   })
-  .transform(({ birth_year, eye_color, hair_color, skin_color, ...rest }) => ({
-    ...rest,
-    birthYear: birth_year,
-    eyeColor: eye_color,
-    hairColor: hair_color,
-    skinColor: skin_color,
-  }));
+  .transform(
+    ({ birth_year, eye_color, hair_color, skin_color, films, ...rest }) => ({
+      ...rest,
+      birthYear: birth_year,
+      eyeColor: eye_color,
+      hairColor: hair_color,
+      skinColor: skin_color,
+      films: films.map(f => ({
+        id: getIdFromUrl(f),
+        title: f,
+      })),
+    })
+  );
 
 export const PlanetSchema = z
   .object({
@@ -135,16 +147,16 @@ const getPerson = async (id: number) => {
   return PersonSchema.parse(data);
 };
 
-const getFilmsForCharacter = async (resourceUrls: string[]) => {
-  const filmRequests = resourceUrls.map(resourceUrl =>
-    getFilmWithCharacters(getIdFromUrl(resourceUrl))
-  );
+const getFilmsForCharacter = async (ids: number[]) => {
+  const filmRequests = ids.map(getFilmWithCharacters);
 
   return Promise.all(filmRequests);
 };
 export const getPersonWithFilms = async (id: number) => {
   const personData = await getPerson(id);
-  const filmsData = await getFilmsForCharacter(personData.films);
+  const filmsData = await getFilmsForCharacter(
+    personData.films.map(({ id }) => id)
+  );
   const homeworld = await getPlanet(getIdFromUrl(personData.homeworld));
 
   return {
@@ -183,7 +195,7 @@ export const getFilmWithCharacters = async (id: number) => {
   const response = await fetchWrapper(`${config.apiUrl}/films/${id}/`);
   const filmData = FilmSchema.parse(response);
   const characters = await getCharactersForFilm(
-    filmData.characters.map(getIdFromUrl)
+    filmData.characters.map(({ id }) => id)
   );
 
   return {

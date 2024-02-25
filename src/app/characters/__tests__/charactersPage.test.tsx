@@ -15,12 +15,11 @@ describe('Characters page', () => {
   it('should render main page title and films', async () => {
     render(await CharactersPage(), { wrapper: ClientProviders });
 
-    await waitForElementToBeRemoved(() => screen.getByText('loading'));
+    await waitForElementToBeRemoved(() => screen.getByLabelText('loading'));
 
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-      'Characters viewed in films:'
+      'Characters'
     );
-    expect(screen.getByText(`Viewed: 1`)).toBeInTheDocument();
     expect(screen.getByText(mockPerson.name)).toBeInTheDocument();
   });
 });

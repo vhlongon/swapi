@@ -1,12 +1,22 @@
 import Link from 'next/link';
-import React from 'react';
 
 const Nav = () => {
   return (
-    <nav>
-      <Link href="/">Films</Link>
-      <Link href="/characters">Characters</Link>
-    </nav>
+    <>
+      <nav className="navbar bg-base-100">
+        <div className="flex-1">Swapi</div>
+        <div className="flex-none">
+          <ul className="menu menu-horizontal px-1">
+            <li>
+              <Link href="/">Films</Link>
+            </li>
+            <li>
+              <Link href="/characters">Characters</Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </>
   );
 };
 

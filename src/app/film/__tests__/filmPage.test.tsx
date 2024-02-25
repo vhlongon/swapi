@@ -10,13 +10,14 @@ describe('Film page', () => {
       mockFilm.title
     );
     expect(screen.getByText(mockFilm.opening_crawl)).toBeInTheDocument();
-    expect(
-      screen.getByText(`Director: ${mockFilm.director}`)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(`Producer: ${mockFilm.producer}`)
-    ).toBeInTheDocument();
-    expect(screen.getByText('Characters:')).toBeInTheDocument();
+
+    expect(screen.getByText(`Director`)).toBeInTheDocument();
+    expect(screen.getByText(mockFilm.director)).toBeInTheDocument();
+
+    expect(screen.getByText(`Producer`)).toBeInTheDocument();
+    expect(screen.getByText(mockFilm.producer)).toBeInTheDocument();
+
+    expect(screen.getByText('Characters')).toBeInTheDocument();
     expect(screen.getByText(mockPerson.name)).toBeInTheDocument();
   });
 });
