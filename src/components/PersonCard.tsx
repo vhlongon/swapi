@@ -13,7 +13,7 @@ export const PersonCard = ({ name, films, ...rest }: PersonCardProps) => {
     <div className="card w-full max-w-96 bg-neutral text-neutral-content">
       <div className="card-body items-center text-center">
         <h1 className="card-title">{name}</h1>
-        <details className="collapse collapse-arrow border border-base-300 bg-base-200">
+        <details className="collapse collapse-arrow border border-base-200 bg-base-100">
           <summary className="collapse-title font-medium">Films</summary>
           <div className="collapse-content">
             <ul className="flex flex-col gap-2">

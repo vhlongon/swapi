@@ -25,7 +25,7 @@ export const FilmCard = ({
         <p className="prose prose-base text-md italic text-gray-500">
           {openingCrawl}
         </p>
-        <details className="collapse collapse-arrow border border-base-300 bg-base-200">
+        <details className="collapse collapse-arrow border border-base-200 bg-base-100">
           <summary className="collapse-title font-medium">Characters</summary>
           <div className="collapse-content">
             <ul className="flex flex-col gap-2">
