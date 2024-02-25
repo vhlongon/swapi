@@ -141,7 +141,7 @@ const getPlanet = async (id: number) => {
   return PlanetSchema.parse(data);
 };
 
-const getPerson = async (id: number) => {
+export const getPerson = async (id: number) => {
   const data = await fetchWrapper(`${config.apiUrl}/people/${id}/`);
 
   return PersonSchema.parse(data);
@@ -189,6 +189,12 @@ const getCharactersForFilm = async (ids: number[]) => {
   const characterRequests = ids.map(getPerson);
 
   return Promise.all(characterRequests);
+};
+
+export const getFilm = async (id: number) => {
+  const response = await fetchWrapper(`${config.apiUrl}/films/${id}/`);
+
+  return FilmSchema.parse(response);
 };
 
 export const getFilmWithCharacters = async (id: number) => {

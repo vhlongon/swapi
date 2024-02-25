@@ -1,10 +1,21 @@
 import { PersonCard } from '@/components/PersonCard';
-import { getPersonWithFilms } from '@/lib/api';
+import { getPerson, getPersonWithFilms } from '@/lib/api';
 import { omit } from '@/lib/utils';
+import { Metadata } from 'next';
 
 type PersonPageProps = {
   params: {
     id: string;
+  };
+};
+
+export const generateMetadata = async ({
+  params,
+}: PersonPageProps): Promise<Metadata> => {
+  const { name } = await getPerson(Number(params.id));
+
+  return {
+    title: name,
   };
 };
 

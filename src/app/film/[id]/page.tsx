@@ -1,10 +1,21 @@
 import { FilmCard } from '@/components/FilmCard';
-import { getFilmWithCharacters } from '@/lib/api';
+import { getFilm, getFilmWithCharacters } from '@/lib/api';
 import { omit } from '@/lib/utils';
+import { Metadata } from 'next';
 
 type FilmPageProps = {
   params: {
     id: string;
+  };
+};
+
+export const generateMetadata = async ({
+  params,
+}: FilmPageProps): Promise<Metadata> => {
+  const { title } = await getFilm(Number(params.id));
+
+  return {
+    title,
   };
 };
 
