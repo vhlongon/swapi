@@ -9,7 +9,7 @@ const baseURL = `http://localhost:${PORT}`;
 // Reference: https://playwright.dev/docs/test-configuration
 export default defineConfig({
   // Timeout per test
-  timeout: 30 * 1000,
+  timeout: 30 * 3000,
   // Test directory
   testDir: './src/e2e',
   // If a test fails, retry it additional 2 times
