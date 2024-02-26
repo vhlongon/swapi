@@ -6,7 +6,7 @@ const Nav = () => {
       <nav className="navbar bg-base-100">
         <div
           aria-label="logo"
-          className="flex-1 font-bold text-primary text-2xl tracking-wider"
+          className="flex-1 ps-2 font-bold text-primary text-2xl tracking-wider"
         >
           Swapi
         </div>
