@@ -2,6 +2,8 @@
 
 ![Coverage Badge](https://raw.githubusercontent.com/gist/vhlongon/b1f395b2532fc512e4b3ce4fa294e1b9/raw/badge.svg)
 
+![Swapi Image](./swapi.png)
+
 This is a simple [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 It fetches data from [Swapi](http://swapi.dev/api) and displays information about the Star Wars characters and movies.
