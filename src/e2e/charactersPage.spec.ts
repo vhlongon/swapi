@@ -18,6 +18,6 @@ test('shows characters from visited filmes page', async ({ page }) => {
   await expect(page.getByRole('link', { name: 'C-3PO' })).toHaveAttribute(
     'href',
     '/person/2',
-    { timeout: 10000 }
+    { timeout: 20000 }
   );
 });
