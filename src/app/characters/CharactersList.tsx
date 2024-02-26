@@ -25,24 +25,22 @@ export const CharactersList = () => {
     return <ErrorCard error={error} reset={refetch} />;
   }
 
-  if (data) {
-    return data.length ? (
-      <ul className="flex flex-col gap-4">
-        {data.map(character => (
-          <li key={character.id}>
-            <Link
-              className="btn btn-outline w-80"
-              href={`/person/${character.id}`}
-            >
-              {character.name}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    ) : (
-      <p>No characters viewed yet</p>
-    );
-  }
+  const characters = data ?? [];
 
-  return <p>No data</p>;
+  return characters.length ? (
+    <ul className="flex flex-col gap-4">
+      {characters.map(character => (
+        <li key={character.id}>
+          <Link
+            className="btn btn-outline w-80"
+            href={`/person/${character.id}`}
+          >
+            {character.name}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p>No characters viewed yet</p>
+  );
 };

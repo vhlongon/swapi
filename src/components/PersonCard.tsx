@@ -10,7 +10,10 @@ type PersonCardProps = Omit<
 
 export const PersonCard = ({ name, films, ...rest }: PersonCardProps) => {
   return (
-    <div className="card w-full max-w-96 bg-neutral text-neutral-content">
+    <div
+      aria-label="person-card"
+      className="card w-full max-w-96 bg-neutral text-neutral-content"
+    >
       <div className="card-body items-center text-center">
         <h1 className="card-title">{name}</h1>
         <details className="collapse collapse-arrow border border-base-200 bg-base-100">

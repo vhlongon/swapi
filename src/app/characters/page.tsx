@@ -1,4 +1,11 @@
+import { Metadata } from 'next';
 import { CharactersList } from './CharactersList';
+
+export const metadata: Metadata = {
+  title: 'Characters - Swapi App',
+  description:
+    'List of Star Wars characters from the visisted films by the user',
+};
 
 export default function CharactersPage() {
   return (
