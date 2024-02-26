@@ -1,38 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Swapi
 
 ![Coverage Badge](https://raw.githubusercontent.com/gist/vhlongon/b1f395b2532fc512e4b3ce4fa294e1b9/raw/badge.svg)
+
+This is a simple [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+It fetches data from [Swapi](http://swapi.dev/api) and displays information about the Star Wars characters and movies.
+
+The project uses:
+
+- [Daizyui](https://daisyui.com/) for styling and components
+- [React query](https://tanstack.com/query/latest/docs/react/overview) for fetching data
+- [Zod](https://github.com/colinhacks/zod) for runtime type validation
+- [Vitest](https://vitest.dev/) and [Testing library](https://testing-library.com/) for testing
+- [MSW](https://mswjs.io/) for mocking the API calls in tests
+- [Playwright](https://playwright.dev/) for e2e testing
+
+Make sure you have [pnpm](https://pnpm.io/) installed. If you don't, you can install it with `npm i -g pnpm`.
 
 ## Getting Started
 
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Running tests
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Run for the unit and integration tests:
 
-## Learn More
+```bash
+pnpm test
+```
 
-To learn more about Next.js, take a look at the following resources:
+or
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm test:ci
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+to get a coverage. See the result report under `coverage/`
 
-## Deploy on Vercel
+Run for the e2e tests:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+pnpm test:e2e
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+or run in ui mode
+
+```bash
+pnpm test:e2e:ui
+```
