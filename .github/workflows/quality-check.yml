@@ -39,6 +39,22 @@ jobs:
       - name: Run unit and integration tests coverage
         run: pnpm test:ci
 
+      - name: 'Report Coverage'
+        # Set if: always() to also generate the report if tests are failing
+        # Only works if you set `reportOnFailure: true` in your vite config as specified above
+        if: always()
+        uses: davelosert/vitest-coverage-report-action@v2
+
+      - name: Publish Results Badge
+        uses: wjervis7/vitest-badge-action@v1.0.0
+        if: success() || failure() # run whether steps succeed or not
+        with:
+          result-type: lines
+          gist-token: ${{ secrets.GIST_TOKEN }}
+          gist-url: https://gist.github.com/vhlongon/b1f395b2532fc512e4b3ce4fa294e1b9
+          upload-badge: true
+          badge-text: Test coverage
+
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
 
