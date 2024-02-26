@@ -24,7 +24,7 @@ export const FilmCard = ({
       className="card w-full max-w-96 bg-neutral text-neutral-content"
     >
       <div className="card-body items-center text-center">
-        <h1 className="card-title">{title}</h1>
+        <h1 className="card-title sw-heading">{title}</h1>
         <p className="prose prose-base text-md italic text-gray-500">
           {openingCrawl}
         </p>

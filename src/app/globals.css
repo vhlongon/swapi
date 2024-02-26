@@ -6,4 +6,12 @@
   .text-balance {
     text-wrap: balance;
   }
+  .sw-heading {
+    @apply text-2xl font-bold tracking-widest uppercase;
+    letter-spacing: 0.15em;
+    color: #fcd34d;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #fcd34d;
+  }
 }

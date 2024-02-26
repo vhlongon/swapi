@@ -1,10 +1,10 @@
 import { ClientProviders } from '@/components/ClientProviders';
 import Nav from '@/components/Nav';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Roboto_Condensed } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const robotCondensed = Roboto_Condensed({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Swapi App',
@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme="sunset">
-      <body className={inter.className}>
+      <body className={robotCondensed.className}>
         <Nav />
         <ClientProviders>{children}</ClientProviders>
       </body>
