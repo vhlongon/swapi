@@ -9,7 +9,14 @@ export default defineConfig({
     exclude: [...defaultExclude, './src/e2e/**'],
     coverage: {
       provider: 'istanbul',
-      reporter: ['text-summary', 'text', 'html', 'lcov', 'json-summary'],
+      reporter: [
+        'text-summary',
+        'text',
+        'html',
+        'lcov',
+        'json-summary',
+        'json',
+      ],
       exclude: [
         ...defaultExclude,
         'playwright.config.ts',
