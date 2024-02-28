@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 export default async function Home() {
   const films = await getFilms();
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-4 gap-4">
       <h1 className="text-4xl font-bold text-center text-accent">Films</h1>

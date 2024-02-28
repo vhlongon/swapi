@@ -19,8 +19,8 @@ export const generateMetadata = async ({
   };
 };
 
-export default async function PersonPage({ params }: PersonPageProps) {
-  const personData = await getPersonWithFilms(Number(params.id));
+const getData = async (id: number) => {
+  const personData = await getPersonWithFilms(id);
   const person = omit(personData, [
     'url',
     'vehicles',
@@ -29,6 +29,12 @@ export default async function PersonPage({ params }: PersonPageProps) {
     'created',
     'edited',
   ]);
+
+  return person;
+};
+
+export default async function PersonPage({ params }: PersonPageProps) {
+  const person = await getData(Number(params.id));
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-4">
