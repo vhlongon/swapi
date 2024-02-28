@@ -147,11 +147,40 @@ export const getPerson = async (id: number) => {
   return PersonSchema.parse(data);
 };
 
+const getCharactersForFilm = async (ids: number[]) => {
+  const characterRequests = ids.map(getPerson);
+
+  return Promise.all(characterRequests);
+};
+
+export const getFilm = async (id: number) => {
+  const response = await fetchWrapper(`${config.apiUrl}/films/${id}/`);
+
+  return FilmSchema.parse(response);
+};
+
+export const getFilmWithCharacters = async (id: number) => {
+  const response = await fetchWrapper(`${config.apiUrl}/films/${id}/`);
+  const filmData = FilmSchema.parse(response);
+  const characters = await getCharactersForFilm(
+    filmData.characters.map(({ id }) => id)
+  );
+
+  return {
+    ...filmData,
+    characters: characters.map(character => ({
+      name: character.name,
+      id: getIdFromUrl(character.url),
+    })),
+  };
+};
+
 const getFilmsForCharacter = async (ids: number[]) => {
   const filmRequests = ids.map(getFilmWithCharacters);
 
   return Promise.all(filmRequests);
 };
+
 export const getPersonWithFilms = async (id: number) => {
   const personData = await getPerson(id);
   const filmsData = await getFilmsForCharacter(
@@ -183,32 +212,4 @@ export const getCharactersForFilms = async (ids: number[]) => {
   });
 
   return result;
-};
-
-const getCharactersForFilm = async (ids: number[]) => {
-  const characterRequests = ids.map(getPerson);
-
-  return Promise.all(characterRequests);
-};
-
-export const getFilm = async (id: number) => {
-  const response = await fetchWrapper(`${config.apiUrl}/films/${id}/`);
-
-  return FilmSchema.parse(response);
-};
-
-export const getFilmWithCharacters = async (id: number) => {
-  const response = await fetchWrapper(`${config.apiUrl}/films/${id}/`);
-  const filmData = FilmSchema.parse(response);
-  const characters = await getCharactersForFilm(
-    filmData.characters.map(({ id }) => id)
-  );
-
-  return {
-    ...filmData,
-    characters: characters.map(character => ({
-      name: character.name,
-      id: getIdFromUrl(character.url),
-    })),
-  };
 };
